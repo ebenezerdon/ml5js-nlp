@@ -16,17 +16,20 @@
     <div class="container mt-5 text-center">
       <textarea class="form-control" id="text" rows="8" placeholder="Review the last movie you watched..."></textarea>
       <img class="h-50 w-50 mt-3" id="resultImage" src="./assets/construction.svg" alt="" />
+      <p class="score"></p>
     </div>
 
     <script>
       const sentiment = ml5.sentiment('movieReviews')
       const textElement = document.getElementById('text')
       const resultImage = document.getElementById('resultImage')
+      const scoreElement = document.getElementsByClassName('score')[0]
 
       textElement.addEventListener('input', () => {
         const { score } = sentiment.predict(textElement.value)
-        if (score > 0.59) resultImage.src = './assets/happy.svg'
-        else if (score < 0.5) resultImage.src = './assets/sad.svg'
+        scoreElement.innerText = `${score.toFixed(2)}`
+        if (score > 0.7) resultImage.src = './assets/happy.svg'
+        else if (score < 0.3) resultImage.src = './assets/sad.svg'
         else resultImage.src = './assets/neutral.svg'
       })
     </script>
