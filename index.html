@@ -15,15 +15,15 @@
   <body>
     <div class="container mt-5 text-center">
       <textarea class="form-control" id="text" rows="8" placeholder="Review the last movie you watched..."></textarea>
-      <img class="h-50 w-50 mt-3" id="resultImage" src="./assets/construction.svg" alt="" />
-      <p class="score"></p>
+      <p id="score" class="mt-3"></p>
+      <img class="h-50 w-50" id="resultImage" src="./assets/construction.svg" alt="" />
     </div>
 
     <script>
       const sentiment = ml5.sentiment('movieReviews')
       const textElement = document.getElementById('text')
       const resultImage = document.getElementById('resultImage')
-      const scoreElement = document.getElementsByClassName('score')[0]
+      const scoreElement = document.getElementById('score')
 
       textElement.addEventListener('input', () => {
         const { score } = sentiment.predict(textElement.value)
